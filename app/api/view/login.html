@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验证码测试</title>
+</head>
+<body>
+<form method="post" action="/api/user/check">
+    <img src="/api/user/captcha"  id="safecode" onclick="reloadcode()"/><br>
+    <input type="text" name="captcha"/>
+    <input type="submit" value="提交" />
+</form>
+</body>
+<script language="JavaScript">
+    function reloadcode(){
+        var verify=document.getElementById('safecode');
+        verify.setAttribute('src','/api/user/captcha?'+Math.random());
+    }
+</script>
+</html>
