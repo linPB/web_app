@@ -6,7 +6,7 @@
  * Time: 21:14
  */
 
-namespace app\admin\controller;
+namespace app\admin\controller\sys;
 
 use support\Request;
 use support\bootstrap\Log;

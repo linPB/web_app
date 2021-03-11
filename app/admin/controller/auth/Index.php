@@ -6,7 +6,7 @@
  * Time: 21:12
  */
 
-namespace app\admin\controller;
+namespace app\admin\controller\auth;
 
 
 class Index

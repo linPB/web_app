@@ -27,7 +27,7 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">辛辣天塞</p>
 
-            <form action="/admin/login/doLogin" method="post">
+            <form action="/admin/auth/login/do_login" method="post">
                 <div class="input-group mb-3">
                     <input name="email" type="email" class="form-control" placeholder="电子邮件" required>
                     <div class="input-group-append">
@@ -44,18 +44,11 @@
                         </div>
                     </div>
                 </div>
-
-{{--                <div class="input-group mb-3">--}}
-{{--                    <img src="/admin/login/captcha" id="captcha"/><br>--}}
-{{--                    <input type="text" name="captcha" />--}}
-{{--                </div>--}}
-
                 <div class="input-group mb-3">
 
                     <input type="text" name="captcha" class="form-control mb-1" placeholder="请输入验证码">
-                    <img src="/admin/login/captcha" style="height: calc(2.25rem + 2px);" onClick="this.src='/admin/login/captcha?'+Math.random()">
+                    <img src="/admin/auth/login/captcha" style="height: calc(2.25rem + 2px);border:1px solid black;" onClick="this.src='/admin/auth/login/captcha?'+Math.random()">
                 </div>
-
 
                 @include('layout.errors')
 

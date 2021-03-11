@@ -30,7 +30,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/index/dashboard" class="nav-link active">
+                            <a href="/admin/auth/index/dashboard" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>首页</p>
                             </a>
@@ -44,25 +44,25 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/user/index" class="nav-link">
+                            <a href="/admin/sys/user/index" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>用户</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/role/index" class="nav-link">
+                            <a href="/admin/auth/role/index" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>角色</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/permission/index" class="nav-link">
+                            <a href="/admin/auth/permission/index" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>权限</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/menu/index" class="nav-link">
+                            <a href="/admin/auth/menu/index" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>菜单</p>
                             </a>

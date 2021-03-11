@@ -6,7 +6,7 @@
  * Time: 21:56
  */
 
-namespace app\admin\controller;
+namespace app\admin\controller\sys;
 
 
 class Menu

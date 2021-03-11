@@ -110,7 +110,7 @@
         </li>
 
         <li class="nav-item dropdown">
-            <a class="nav-link" href="/admin/login/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+            <a class="nav-link" href="/admin/auth/login/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
         </li>
     </ul>
 </nav>

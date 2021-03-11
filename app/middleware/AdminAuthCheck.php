@@ -18,9 +18,9 @@ class AdminAuthCheck implements MiddlewareInterface
     public function process(Request $request, callable $next) : Response
     {
         if (empty(session('id')) ) {
-            if(strcmp($request->controller,'app\admin\controller\Login' )==0) {
+            if(strcmp($request->controller,'app\admin\controller\auth\Login' )==0) {
                 if (strcmp($request->action,'logout' )==0) {
-                    return redirect('/admin/login/index');
+                    return redirect('/admin/auth/login/index');
                 } else {
                     return $next($request);
                 }
@@ -29,8 +29,8 @@ class AdminAuthCheck implements MiddlewareInterface
             }
         } else {
             if(Redis::connection('session')->get('user_id:'.session('id'))) {
-                if(strcmp($request->controller,'app\admin\controller\Login' )==0 && strcmp($request->action,'index' )==0) {
-                    return redirect('/admin/index/base');
+                if(strcmp($request->controller,'app\admin\controller\auth\Login' )==0 && strcmp($request->action,'index' )==0) {
+                    return redirect('/admin/auth/index/base');
                 } else {
                     return $next($request);
                 }
