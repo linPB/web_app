@@ -18,18 +18,23 @@ class User
         return $request->controller.'->'.$request->action;
     }
 
-    public function get($request, $id)
+    public function showEdit(Request $request)
     {
-        return response('接收到参数'.$id);
+        return $request->controller.'->'.$request->action;
     }
 
-    public function hello(Request $request)
+    public function edit(Request $request)
     {
-        return 'hello';
+        return $request->controller.'->'.$request->action;
     }
 
-    public function login(Request $request)
+    public function store(Request $request)
     {
-        return 'login';
+        return $request->controller.'->'.$request->action;
+    }
+
+    public function showStore(Request $request)
+    {
+        return $request->controller.'->'.$request->action;
     }
 }
