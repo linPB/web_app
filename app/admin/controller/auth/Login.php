@@ -10,7 +10,7 @@ namespace app\admin\controller\auth;
 
 
 use support\Request;
-use app\admin\model\AdminUser;
+use app\admin\model\sys\AdminUser;
 use support\bootstrap\Redis;
 use Gregwar\Captcha\CaptchaBuilder;
 use Respect\Validation\Validator;
@@ -64,7 +64,7 @@ class Login
                 if ($params['remember'] == true) $life_time = 7 * 24 * 3600;
                 Redis::connection('session')->set('user_id:'.$user->id ,$user->user_name ,'EX',$life_time);
                 session($user->toArray());
-                return redirect('/admin/auth/index/dashboard');
+                return redirect('/admin/auth/index/home');
             } else {
                 return view('auth/login/index', ['errors' => ['密码错误']]);
             }

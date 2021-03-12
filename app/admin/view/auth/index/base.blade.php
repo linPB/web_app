@@ -37,7 +37,7 @@ to get the desired effect
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <iframe name="mainiframe" id="mainiframe" width="100%"  src="/admin/auth/index/home"
+    <iframe name="mainiframe" id="mainiframe" width="100%"  src="/admin/auth/index/dashboard"
             frameborder="0" marginwidth="0" marginheight="0" scrolling="auto"
             onload="changeFrameHeight()"
     ></iframe>

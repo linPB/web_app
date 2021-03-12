@@ -15,7 +15,7 @@ class User
 {
     public function index(Request $request)
     {
-        return $request->controller.'->'.$request->action;
+        return view('sys/user/index');
     }
 
     public function showEdit(Request $request)

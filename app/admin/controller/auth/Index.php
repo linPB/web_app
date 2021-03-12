@@ -11,12 +11,12 @@ namespace app\admin\controller\auth;
 
 class Index
 {
-    public function dashboard()
+    public function index()
     {
         return view('auth/index/base');
     }
 
-    public function home()
+    public function dashboard()
     {
         return view('auth/index/home');
     }

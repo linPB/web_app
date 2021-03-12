@@ -11,7 +11,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="{{session('avatar_url')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{session('user_name')}}</a>
@@ -30,7 +30,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/auth/index/dashboard" class="nav-link active">
+                            <a href="/admin/auth/index/dashboard" class="nav-link" target="mainiframe">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>首页</p>
                             </a>
@@ -44,25 +44,25 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/sys/user/index" class="nav-link">
+                            <a href="/admin/sys/user/index" class="nav-link" target="mainiframe">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>用户</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/auth/role/index" class="nav-link">
+                            <a href="/admin/auth/role/index" class="nav-link" target="mainiframe">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>角色</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/auth/permission/index" class="nav-link">
+                            <a href="/admin/auth/permission/index" class="nav-link" target="mainiframe">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>权限</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/auth/menu/index" class="nav-link">
+                            <a href="/admin/auth/menu/index" class="nav-link" target="mainiframe">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>菜单</p>
                             </a>

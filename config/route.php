@@ -19,8 +19,8 @@ Route::group('/admin/auth', function () {
     Route::get('/login/logout', [app\admin\controller\auth\Login::class, 'logout']);
     Route::post('/login/do_login', [app\admin\controller\auth\Login::class, 'doLogin']);
     Route::get('/login/captcha', [app\admin\controller\auth\Login::class, 'captcha']);
+    Route::get('/index/home', [app\admin\controller\auth\Index::class, 'index']);
     Route::get('/index/dashboard', [app\admin\controller\auth\Index::class, 'dashboard']);
-    Route::get('/index/home', [app\admin\controller\auth\Index::class, 'home']);
 });
 
 Route::group('/admin/sys', function () {
