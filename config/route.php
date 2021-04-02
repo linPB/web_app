@@ -27,8 +27,9 @@ Route::group('/admin/sys', function () {
     Route::get('/user/index', [app\admin\controller\sys\User::class, 'index']);
     Route::get('/user/show_edit', [app\admin\controller\sys\User::class, 'showEdit']);
     Route::post('/user/edit', [app\admin\controller\sys\User::class, 'edit']);
-    Route::get('/user/store', [app\admin\controller\sys\User::class, 'showStore']);
-    Route::post('/user/show_store', [app\admin\controller\sys\User::class, 'store']);
+    Route::get('/user/show_store', [app\admin\controller\sys\User::class, 'showStore']);
+    Route::post('/user/store', [app\admin\controller\sys\User::class, 'store']);
+    Route::post('/user/del', [app\admin\controller\sys\User::class, 'del']);
 
     Route::get('/menu/index', [app\admin\controller\sys\Menu::class, 'index']);
     Route::get('/menu/show_edit', [app\admin\controller\sys\Menu::class, 'showEdit']);

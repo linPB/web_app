@@ -14,7 +14,6 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="/assist/font-awesome-4.7.0/css/font-awesome.min.css">
-
     @yield('links')
 
 </head>

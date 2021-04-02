@@ -25,7 +25,8 @@ to get the desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="sidebar-mini control-sidebar-slide-open text-sm sidebar-collapse">
+{{--sidebar-collapse 收起--}}
+<body class="sidebar-mini control-sidebar-slide-open text-sm">
 
 <div class="wrapper">
 <!-- Navbar -->

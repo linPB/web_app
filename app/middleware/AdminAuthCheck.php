@@ -30,7 +30,7 @@ class AdminAuthCheck implements MiddlewareInterface
         } else {
             if(Redis::connection('session')->get('user_id:'.session('id'))) {
                 if(strcmp($request->controller,'app\admin\controller\auth\Login' )==0 && strcmp($request->action,'index' )==0) {
-                    return redirect('/admin/auth/index/index');
+                    return redirect('/admin/auth/index/home');
                 } else {
                     return $next($request);
                 }
