@@ -8,12 +8,17 @@
 
 namespace app\admin\controller\auth;
 
+use app\lib\assist\CacheFun;
 
 class Index
 {
+    use CacheFun;
+
     public function index()
     {
-        return view('auth/index/base');
+        return view('auth/index/base', [
+            'menus' => $this->getFilterAdminMenus(session('id'))
+        ]);
     }
 
     public function dashboard()

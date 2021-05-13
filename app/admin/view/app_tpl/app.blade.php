@@ -14,6 +14,10 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="/assist/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assist/bootstrap-table/dist/bootstrap-table.css">
+    <link rel="stylesheet" href="/adminlte/plugins/sweetalert2/sweetalert2.css">
+    <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.css">
+
     @yield('links')
 
 </head>
@@ -43,8 +47,11 @@ to get the desired effect
 <script src="/adminlte/plugins/chart.js/Chart.min.js"></script>
 <script src="/adminlte/dist/js/demo.js"></script>
 <script src="/adminlte/dist/js/pages/dashboard3.js"></script>
+<script src="/assist/bootstrap-table/dist/bootstrap-table.js"></script>
+<script src="/assist/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/adminlte/plugins/sweetalert2/sweetalert2.js"></script>
+<script src="/adminlte/plugins/select2/js/select2.js"></script>
 
 @yield('scripts')
-
 </body>
 </html>

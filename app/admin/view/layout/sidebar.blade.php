@@ -21,54 +21,27 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column text-sm nav-legacy nav-compact" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>仪表盘<i class="right fas fa-angle-left"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/admin/auth/index/dashboard" class="nav-link" target="mainiframe">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>首页</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p>系统配置<i class="fas fa-angle-left right"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/admin/sys/user/index" class="nav-link" target="mainiframe">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>用户</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/admin/auth/role/index" class="nav-link" target="mainiframe">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>角色</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/admin/auth/permission/index" class="nav-link" target="mainiframe">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>权限</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/admin/auth/menu/index" class="nav-link" target="mainiframe">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>菜单</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
+                @foreach($menus as $menu)
+                    {{--<li class="nav-item has-treeview menu-open">--}}
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>{{$menu['name']}}<i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        @foreach($menu['child'] as $child)
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{$child['path']}}" class="nav-link" target="mainiframe">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{$child['name']}}</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        @endforeach
+                    </li>
+                @endforeach
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

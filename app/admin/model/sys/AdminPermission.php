@@ -16,4 +16,6 @@ class AdminPermission extends Model
     protected $table = 'admin_permission';
     protected $primaryKey = 'id';
     public $timestamps = false;
+
+    protected $fillable = ['name', 'path', 'type'];
 }

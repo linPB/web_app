@@ -16,4 +16,11 @@ class AdminRole extends Model
     protected $table = 'admin_role';
     protected $primaryKey = 'id';
     public $timestamps = false;
+
+    protected $fillable = ['role_name'];
+
+    public function permissions()
+    {
+        return $this->belongsToMany(AdminPermission::class,'admin_r_p', 'role_id', 'permission_id');
+    }
 }

@@ -25,27 +25,31 @@ Route::group('/admin/auth', function () {
 
 Route::group('/admin/sys', function () {
     Route::get('/user/index', [app\admin\controller\sys\User::class, 'index']);
-    Route::get('/user/show_edit', [app\admin\controller\sys\User::class, 'showEdit']);
-    Route::post('/user/edit', [app\admin\controller\sys\User::class, 'edit']);
-    Route::get('/user/show_store', [app\admin\controller\sys\User::class, 'showStore']);
+    Route::post('/user/show', [app\admin\controller\sys\User::class, 'show']);
+    Route::post('/user/upd_show', [app\admin\controller\sys\User::class, 'editShow']);
+    Route::post('/user/upd', [app\admin\controller\sys\User::class, 'edit']);
+    Route::post('/user/add_show', [app\admin\controller\sys\User::class, 'storeShow']);
     Route::post('/user/store', [app\admin\controller\sys\User::class, 'store']);
     Route::post('/user/del', [app\admin\controller\sys\User::class, 'del']);
+    Route::post('/user/reset_pd', [app\admin\controller\sys\User::class, 'resetPd']);
 
     Route::get('/menu/index', [app\admin\controller\sys\Menu::class, 'index']);
-    Route::get('/menu/show_edit', [app\admin\controller\sys\Menu::class, 'showEdit']);
-    Route::post('/menu/edit', [app\admin\controller\sys\Menu::class, 'edit']);
-    Route::get('/menu/store', [app\admin\controller\sys\Menu::class, 'showStore']);
-    Route::post('/menu/show_store', [app\admin\controller\sys\Menu::class, 'store']);
+    Route::post('/menu/show', [app\admin\controller\sys\Menu::class, 'show']);
+    Route::post('/menu/upd', [app\admin\controller\sys\Menu::class, 'edit']);
+    Route::post('/menu/store', [app\admin\controller\sys\Menu::class, 'store']);
+    Route::post('/menu/del', [app\admin\controller\sys\Menu::class, 'del']);
 
     Route::get('/role/index', [app\admin\controller\sys\Role::class, 'index']);
-    Route::get('/role/show_edit', [app\admin\controller\sys\Role::class, 'showEdit']);
-    Route::post('/role/edit', [app\admin\controller\sys\Role::class, 'edit']);
-    Route::get('/role/store', [app\admin\controller\sys\Role::class, 'showStore']);
-    Route::post('/role/show_store', [app\admin\controller\sys\Role::class, 'store']);
+    Route::post('/role/show', [app\admin\controller\sys\Role::class, 'show']);
+    Route::post('/role/upd_show', [app\admin\controller\sys\Role::class, 'editShow']);
+    Route::post('/role/upd', [app\admin\controller\sys\Role::class, 'edit']);
+    Route::post('/role/add_show', [app\admin\controller\sys\Role::class, 'storeShow']);
+    Route::post('/role/store', [app\admin\controller\sys\Role::class, 'store']);
+    Route::post('/role/del', [app\admin\controller\sys\Role::class, 'del']);
 
     Route::get('/permission/index', [app\admin\controller\sys\Permission::class, 'index']);
-    Route::get('/permission/show_edit', [app\admin\controller\sys\Permission::class, 'showEdit']);
-    Route::post('/permission/edit', [app\admin\controller\sys\Permission::class, 'edit']);
-    Route::get('/permission/store', [app\admin\controller\sys\Permission::class, 'showStore']);
-    Route::post('/permission/show_store', [app\admin\controller\sys\Permission::class, 'store']);
+    Route::post('/permission/show', [app\admin\controller\sys\Permission::class, 'show']);
+    Route::post('/permission/upd', [app\admin\controller\sys\Permission::class, 'edit']);
+    Route::post('/permission/store', [app\admin\controller\sys\Permission::class, 'store']);
+    Route::post('/permission/del', [app\admin\controller\sys\Permission::class, 'del']);
 });

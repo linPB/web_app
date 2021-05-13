@@ -25,18 +25,19 @@ class AdminAuthCheck implements MiddlewareInterface
                     return $next($request);
                 }
             } else {
-                return view('auth/login/index', ['errors' => ['登陆认证过期']]);
+                return redirect('/admin/auth/login/index');
             }
         } else {
             if(Redis::connection('session')->get('user_id:'.session('id'))) {
                 if(strcmp($request->controller,'app\admin\controller\auth\Login' )==0 && strcmp($request->action,'index' )==0) {
                     return redirect('/admin/auth/index/home');
                 } else {
+                    //todo 中间键再加入权限的判断
                     return $next($request);
                 }
             } else {
                 $request->session()->flush();
-                return view('auth/login/index', ['errors' => ['登陆认证过期']]);
+                return redirect('/admin/auth/login/index');
             }
         }
     }

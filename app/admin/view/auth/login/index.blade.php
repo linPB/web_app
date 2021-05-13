@@ -16,6 +16,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="/assist/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/adminlte/plugins/sweetalert2/sweetalert2.css">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -80,5 +81,16 @@
 <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/adminlte/dist/js/adminlte.min.js"></script>
+<script src="/adminlte/plugins/sweetalert2/sweetalert2.js"></script>
+<script>
+    //显示登录页时，需要刷新整个页面，不然登陆页会显示到iframe中
+    if (window !== top){
+        top.location.href = location.href;
+    }
+
+    if ('{{session()->get('errors')}}' === 'true') {
+        Swal.fire({title: 'Emm...', text: '{{session()->get('errors')}}', icon: 'error', timer: 3000});
+    }
+</script>
 </body>
 </html>

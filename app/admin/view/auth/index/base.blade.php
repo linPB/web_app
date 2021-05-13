@@ -14,6 +14,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="/assist/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/adminlte/plugins/sweetalert2/sweetalert2.css">
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -26,7 +27,7 @@ to get the desired effect
 |---------------------------------------------------------|
 -->
 {{--sidebar-collapse 收起--}}
-<body class="sidebar-mini control-sidebar-slide-open text-sm">
+<body class="sidebar-mini control-sidebar-slide-open text-sm sidebar-collapse">
 
 <div class="wrapper">
 <!-- Navbar -->
@@ -67,14 +68,15 @@ to get the desired effect
 <script src="/adminlte/plugins/chart.js/Chart.min.js"></script>
 <script src="/adminlte/dist/js/demo.js"></script>
 <script src="/adminlte/dist/js/pages/dashboard3.js"></script>
+<script src="/adminlte/plugins/sweetalert2/sweetalert2.js"></script>
 
 <script>
 
     $('.nav-item li').click(function(){
         // 移除点击的li以外的li的active class
-        var obj = $(this).siblings().removeClass('active');
+        $(this).siblings().removeClass('active');
         // 给点击的li添加active class
-        var obj = $(this).addClass('active');
+        $(this).addClass('active');
     });
 
     function changeFrameHeight(){
@@ -92,6 +94,23 @@ to get the desired effect
         }
         changeFrameHeight();
     };
+
+    function doExit() {
+        Swal.fire({
+            title: '您确定要执行此操作嘛?',
+            text: '此操作执行后将重新跳转到登陆界面重新登陆!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '是的, 退出!',
+            cancelButtonText: '不, 在逗留会儿',
+        }).then((result) => {
+            if (result.value) {
+                window.location.href="/admin/auth/login/logout";
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire('已取消', '很好,大爷,再玩会儿噢 :)', 'error')
+            }
+        })
+    }
 </script>
 </body>
 </html>
