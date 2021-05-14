@@ -35,6 +35,7 @@ Route::group('/admin/sys', function () {
 
     Route::get('/menu/index', [app\admin\controller\sys\Menu::class, 'index']);
     Route::post('/menu/show', [app\admin\controller\sys\Menu::class, 'show']);
+    Route::post('/menu/store_or_add_show', [app\admin\controller\sys\Menu::class, 'editOrStoreShow']);
     Route::post('/menu/upd', [app\admin\controller\sys\Menu::class, 'edit']);
     Route::post('/menu/store', [app\admin\controller\sys\Menu::class, 'store']);
     Route::post('/menu/del', [app\admin\controller\sys\Menu::class, 'del']);

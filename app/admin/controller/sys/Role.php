@@ -31,7 +31,9 @@ class Role
 
             if($params['role_name'])    $where[] = ['role_name', 'like', "%{$params['role_name']}%"];
             $list = AdminRole::where($where)->orderBy($request->input('sort', 'id'), $request->input('sort_order', 'desc'))->get();
-            foreach ($list as $v) $v->permissions = AdminRole::find($v->id)->permissions()->get();
+            foreach ($list as $v) {
+                $v->permissions = AdminRole::find($v->id)->permissions()->get();
+            }
             return json(['code' => 0, 'msg' => 'ok', 'data' => ['list' => $list,]]);
         } catch (\Exception $e) {
             return json(['code' => 1, 'msg' => $e->getMessage()]);

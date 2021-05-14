@@ -19,14 +19,44 @@ class Menu
 
     public function index()
     {
+        return view('sys/menu/index');
+    }
+
+    public function show()
+    {
         $list = AdminMenu::with(array('permission'=>function($query){
             $query->select('id','name','path');
         }))->get()->toArray();
         $menus = AdminMenu::getMenus($list);
-        return view('sys/menu/index', compact('menus'));
+
+        $final = [];
+        foreach ($menus as $menu) {
+            $final[] = [
+                'id' => $menu['id'],
+                'pid' => $menu['pid'],
+                'permission_id' => $menu['permission_id'],
+                'sort' => $menu['sort'],
+                'name' => $menu['permission']['name'],
+                'path' => $menu['permission']['path'],
+            ];
+            foreach ($menu['child'] as $child) {
+                $final[] = [
+                    'id' => $child['id'],
+                    'pid' => $child['pid'],
+                    'permission_id' => $child['permission_id'],
+                    'sort' => $child['sort'],
+                    'name' => $child['permission']['name'],
+                    'path' => $child['permission']['path'],
+                ];
+            }
+        }
+
+        return json(['code' => 0, 'msg' => 'ok', 'data' => [
+            'data' => $final,
+        ]]);
     }
 
-    public function show(Request $request)
+    public function editOrStoreShow(Request $request)
     {
         try {
             $pid = $request->input('pid', 0);

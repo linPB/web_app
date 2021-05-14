@@ -44,7 +44,8 @@
               </div>
 
               <div class="table-responsive">
-                <table id="table" class="table text-nowrap"></table>
+{{--                <table id="table" class="table text-nowrap"></table>--}}
+                <table id="table"></table>
               </div>
             </div>
           </div>
@@ -146,13 +147,12 @@
           field: 'role_name',
           title: '角色名',
           align: 'center',
-          width: '230px',
           sortable: true,
       }, {
           field: 'permissions',
           title: '权限',
           align: 'left',
-          width: '400px',
+          width: '960px',
           formatter: function (value, row, index) {
             var btntext = '';
             for (var i = 0; i < value.length; i++) {
@@ -199,6 +199,12 @@
           return {
             total: res.data.total,
             rows: newdata
+          };
+        } else {
+          Swal.fire({title: 'Emm...', text: res.msg, icon: 'error', timer: 3000});
+          return {
+            total: 0,
+            rows: []
           };
         }
       },

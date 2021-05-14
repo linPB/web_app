@@ -37,64 +37,13 @@
                     </label>
                   </div>
                 </div>
+
+                <div class="table-responsive">
+                  <table id="table" class="table text-nowrap"></table>
+                </div>
+
               </div>
 
-              <!-- /.card-header -->
-              <div class="card-body table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>菜单名</th>
-                    <th>PATH</th>
-                    <th>排序</th>
-                    <th>操作</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  @foreach($menus as $menu)
-                  <tr>
-                      <td>#{{$menu['id']}}</td>
-                      <td>{{$menu['permission']['name']}}</td>
-                      <td>{{$menu['permission']['path']}}</td>
-                      <td>{{$menu['sort']}}</td>
-                      <td>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                          <label class="btn btn-secondary">
-                            <input type="radio" name="options" onclick="store('{{$menu['id']}}')"> 添加
-                          </label>
-                          <label class="btn btn-secondary">
-                            <input type="radio" name="options" onclick="upd('{{$menu['id']}}', '{{$menu['pid']}}', '{{$menu['sort']}}', '{{$menu['permission_id']}}')"> 编辑
-                          </label>
-                          <label class="btn btn-secondary">
-                            <input type="radio" name="options" onclick="del('{{$menu['id']}}', '{{$menu['pid']}}')"> 删除
-                          </label>
-                        </div>
-                      </td>
-                  </tr>
-                    @foreach($menu['child'] as $child)
-                    <tr>
-                      <td>#{{$child['id']}}</td>
-                      <td style="text-align: right">{{$child['permission']['name']}}</td>
-                      <td style="text-align: right">{{$child['permission']['path']}}</td>
-                      <td>{{$child['sort']}}</td>
-                      <td style="text-align: right">
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                          <label class="btn btn-secondary">
-                            <input type="radio" name="options" onclick="upd('{{$child['id']}}', '{{$child['pid']}}', '{{$child['sort']}}', '{{$child['permission_id']}}')"> 编辑
-                          </label>
-                          <label class="btn btn-secondary">
-                            <input type="radio" name="options" onclick="del('{{$child['id']}}', '{{$child['pid']}}')"> 删除
-                          </label>
-                        </div>
-                      </td>
-                    </tr>
-                    @endforeach
-                  @endforeach
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>
@@ -152,9 +101,151 @@
 
 @section('scripts')
   <script>
+
+    $('#table').bootstrapTable({
+      url: '/admin/sys/menu/show',  //请求后台的url（*）
+      method: 'post',               //请求方式（*）
+      theadClasses:'thead-dark',    //设置表标题样式,默认undefined,可选thead-light、thead-dark
+      height: 760,                  //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+      striped: true,                //是否显示行间隔色
+      cache: false,                 //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+      pagination: true,             //是否显示分页（*）
+      //sortable: true,                 //设置基本排序
+      //sortOrder: "asc",             //排序方式
+      queryParamsType: '',
+      datatype: 'json',
+      paginationShowPageGo: true,
+      showJumpTo: true,
+      pageNumber: 1,                //初始化加载第一页，默认第一页
+      queryParams: function (params){
+        return {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+          page_num: params.pageNumber,
+          page_size: params.pageSize,
+          sort: params.sortName,
+          sort_order: params.sortOrder,
+          user_name:$('#user_name').val(),
+          email:$('#email').val(),
+          phone:$('#phone').val()
+        };
+      },                              //请求服务器时所传的参数
+      sidePagination: 'server',       //指定服务器端分页
+      pageSize: 10,                    //单页记录数
+      pageList: [10, 20, 30, 40, '所有'],//分页步进值,当记录条数大于最小可选择条数时才会出现
+      search: false,                  //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+      silent: true,                   //静默刷新
+      uniqueId: "id",                 //每一行的唯一标识，一般为主键列
+      showRefresh: true,              //是否显示刷新按钮
+      showColumns: true,              //是否显示 内容列下拉框
+      showToggle: true,               //是否显示详细视图和列表视图的切换按钮
+      minimumCountColumns: 5,         //最少允许的列数
+      clickToSelect: true,            //是否启用点击选中行
+      checkboxHeader: true,           //复选框标题
+      showFullscreen: true,           //复选框标题
+      smartDisplay: true,             //智能显示分页或名片视图
+      cardView: false,                //是否显示详细视图
+      detailView: false,              //是否显示父子表
+
+      columns: [
+        {
+          field: 'id',
+          title: '序号',
+          align: 'center',
+          formatter: function (value, row, index) {return '#' + row.id;},
+        }, {
+          field: 'permission_id',
+          title: '权限ID',
+          align: 'left',
+        }, {
+          field: 'name',
+          title: '菜单名',
+          align: 'left',
+        }, {
+          field: 'pid',
+          title: '菜单类型',
+          align: 'left',
+          formatter: function (value, row, index) {
+            if (row.pid === 0) {
+              return "<span style='color: blue'>父级</span>";
+            } else {
+              return "<span style='color: grey'>子级</span>";
+            }
+          }
+        }, {
+          field: 'path',
+          title: 'PATH',
+          align: 'left',
+        }, {
+          field: 'sort',
+          title: '排序',
+          align: 'left',
+        }, {
+          field: 'operation',
+          title: '操作',
+          align: 'left',
+          formatter: function (value, row, index) {
+            var btntext = '';
+            btntext += "<div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">";
+            if(row.pid === 0) {
+              btntext += "<label class=\"btn btn-secondary\"> <input type=\"radio\" name=\"options\" onclick=\"store('" + row.id + "')\" autocomplete=\"off\" checked=\"\"> 添加 </label>";
+            }
+            btntext += "<label class=\"btn btn-secondary\"> <input type=\"radio\" name=\"options\" onclick=\"upd('" + row.id + "','" + row.pid + "','" + row.sort + "','" + row.permission_id + "')\" autocomplete=\"off\"> 编辑 </label>";
+            btntext += "<label class=\"btn btn-secondary\"> <input type=\"radio\" name=\"options\" onclick=\"del('" + row.id + "','" + row.pid + "')\" autocomplete=\"off\"> 删除 </label>";
+
+            btntext += "</div>";
+
+            return btntext;
+          }//表格中增加按钮
+        }
+      ],
+      responseHandler: function (res) { //后台返回的结果
+        if(res.code === 0){
+          var userinfo = res.data.data;
+          var newdata = [];
+          if (userinfo.length) {
+            for (var i = 0; i < userinfo.length; i++) {
+              var datanewobj = {
+                'id': '',
+                "permission_id": '',
+                "name": '',
+                "pid": '',
+                "path": '',
+                'sort': '',
+                'status': ''
+              };
+
+              datanewobj.id = userinfo[i].id;
+              datanewobj.permission_id = userinfo[i].permission_id;
+              datanewobj.name = userinfo[i].name;
+              datanewobj.pid = userinfo[i].pid;
+              datanewobj.path = userinfo[i].path;
+              datanewobj.sort = userinfo[i].sort;
+              datanewobj.status = userinfo[i].status;
+              newdata.push(datanewobj);
+            }
+          }
+
+          return {
+            total: res.data.total,
+            rows: newdata
+          };
+        } else {
+          Swal.fire({title: 'Emm...', text: res.msg, icon: 'error', timer: 3000});
+          return {
+            total: 0,
+            rows: []
+          };
+        }
+      },
+      onLoadSuccess: function () {
+      },
+      onLoadError: function () {
+        Swal.fire({title: 'Emm...', text: "数据加载失败！", icon: 'error', timer: 3000});
+      }
+    });
+
     function store(type) {
       $.ajax({
-        url: '/admin/sys/menu/show',
+        url: '/admin/sys/menu/store_or_add_show',
         method: "POST",
         data: {
           "pid": type,
@@ -213,9 +304,9 @@
         },
         success: function success(data) {
           if (data.code === 0) {
-            //Swal.fire({title: 'Emm...', text: data.msg, icon: 'success', timer: 3000});
-            //$('#addModal').modal('hide');
-            location.reload();
+            Swal.fire({title: 'Emm...', text: data.msg, icon: 'success', timer: 3000});
+            $('#addModal').modal('hide');
+            $('#table').bootstrapTable('refresh');
           } else {
             Swal.fire({title: 'Emm...', text: data.msg, icon: 'error', timer: 3000});
           }
@@ -226,7 +317,7 @@
     //getData方法获取全部页面数据后，将data转为json对象，使用index当前行号作为下标获取对应数据
     function upd(id, pid, sort, permission_id){
       $.ajax({
-        url: '/admin/sys/menu/show',
+        url: '/admin/sys/menu/store_or_add_show',
         method: "POST",
         data: {
           "pid": pid,
@@ -289,9 +380,9 @@
         },
         success: function success(data) {
           if (data.code === 0) {
-            //Swal.fire({title: 'Emm...', text: data.msg, icon: 'success', timer: 3000});
-            //$('#updModal').modal('hide')
-            location.reload();
+            Swal.fire({title: 'Emm...', text: data.msg, icon: 'success', timer: 3000});
+            $('#updModal').modal('hide')
+            $('#table').bootstrapTable('refresh');
           } else {
             Swal.fire({title: 'Emm...', text: data.msg, icon: 'error', timer: 3000});
           }
@@ -322,8 +413,8 @@
             },
             success: function success(data) {
               if (data.code === 0) {
-                //Swal.fire({title: 'Emm...', text: data.msg, icon: 'success', timer: 3000});
-                location.reload();
+                Swal.fire({title: 'Emm...', text: data.msg, icon: 'success', timer: 3000});
+                $('#table').bootstrapTable('refresh');
               } else {
                 Swal.fire({title: 'Emm...', text: data.msg, icon: 'error', timer: 3000});
               }

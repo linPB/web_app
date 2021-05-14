@@ -143,4 +143,19 @@ trait CacheFun
         }
         return $final;
     }
+
+    /**
+     * 根据uid，找到对应的权限集合，判断path是否在泉河集合内，如在则拥有权限
+     * @param $path
+     * @param $uid
+     * @return bool
+     */
+    public function hasAdminPermission($path, $uid) :bool
+    {
+        $permission = $this->getAdminPermissions($uid);
+        $filter = array_column($permission, 'path');
+        //var_dump($path, $filter);
+        if(in_array($path, $filter)) return true;
+        return false;
+    }
 }

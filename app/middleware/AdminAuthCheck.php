@@ -8,6 +8,7 @@
 
 namespace app\middleware;
 
+use app\lib\assist\CacheFun;
 use Webman\MiddlewareInterface;
 use Webman\Http\Request;
 use Webman\Http\Response;
@@ -15,6 +16,8 @@ use support\bootstrap\Redis;
 
 class AdminAuthCheck implements MiddlewareInterface
 {
+    use CacheFun;
+
     public function process(Request $request, callable $next) : Response
     {
         if (empty(session('id')) ) {
@@ -32,7 +35,9 @@ class AdminAuthCheck implements MiddlewareInterface
                 if(strcmp($request->controller,'app\admin\controller\auth\Login' )==0 && strcmp($request->action,'index' )==0) {
                     return redirect('/admin/auth/index/home');
                 } else {
-                    //todo 中间键再加入权限的判断
+                    if($request->isAjax() && !$this->hasAdminPermission($request->path(), session('id'))) {
+                        return json(['code' => 1, 'msg' => 'sorry,您无此权限~']);
+                    }
                     return $next($request);
                 }
             } else {

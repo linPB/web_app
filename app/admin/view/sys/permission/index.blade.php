@@ -152,7 +152,7 @@
       height: 760,                  //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
       striped: true,                //是否显示行间隔色
       cache: false,                 //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-      pagination: false,             //是否显示分页（*）
+      pagination: true,             //是否显示分页（*）
       //sortable: true,                 //设置基本排序
       //sortOrder: "asc",             //排序方式
       queryParamsType: '',
@@ -161,6 +161,7 @@
       showJumpTo: true,
       pageNumber: 1,                //初始化加载第一页，默认第一页
       queryParams: function (params){
+        console.log(params)
         return {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
           page_num: params.pageNumber,
           page_size: params.pageSize,
@@ -200,19 +201,19 @@
         {
           field: 'name',
           title: '权限名',
-          align: 'center',
+          align: 'left',
           width: '230px',
           sortable: true,
         }, {
           field: 'path',
           title: '权限地址',
-          align: 'center',
+          align: 'left',
           width: '230px',
           sortable: true,
         }, {
           field: 'type',
           title: '权限类型',
-          align: 'center',
+          align: 'left',
           width: '230px',
           formatter: function (value, row, index) {
             switch(row.type){
@@ -262,6 +263,12 @@
           return {
             total: res.data.total,
             rows: newdata
+          };
+        } else {
+          Swal.fire({title: 'Emm...', text: res.msg, icon: 'error', timer: 3000});
+          return {
+            total: 0,
+            rows: []
           };
         }
       },

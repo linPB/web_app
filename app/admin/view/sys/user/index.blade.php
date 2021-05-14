@@ -212,7 +212,7 @@
       showJumpTo: true,
       pageNumber: 1,                //初始化加载第一页，默认第一页
       queryParams: function (params){
-        //console.log(params)
+        console.log(params)
         return {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
           page_num: params.pageNumber,
           page_size: params.pageSize,
@@ -359,12 +359,18 @@
             total: res.data.total,
             rows: newdata
           };
+        } else {
+          Swal.fire({title: 'Emm...', text: res.msg, icon: 'error', timer: 3000});
+          return {
+            total: 0,
+            rows: []
+          };
         }
       },
       onLoadSuccess: function () {
       },
       onLoadError: function () {
-        alert("数据加载失败！");
+        Swal.fire({title: 'Emm...', text: "数据加载失败！", icon: 'error', timer: 3000});
       }
     });
 
